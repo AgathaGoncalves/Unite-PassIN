@@ -2,8 +2,8 @@
 from typing import Dict
 from src.models.settings.connection import db_connection_handler
 from src.models.entities.events import Events
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.exc import NoResultFound
+from sqlalchemy.exc import IntegrityError,NoResultFound
+
 
 class EventsRepository:
     def insert_event(self, eventsInfo: Dict) -> Dict:

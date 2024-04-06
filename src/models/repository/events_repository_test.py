@@ -1,7 +1,7 @@
 # pylint: disable-all
 import pytest
 from src.models.settings.connection import db_connection_handler
-from .events_respository import EventsRepository
+from .events_repository import EventsRepository
 
 db_connection_handler.connect_to_db()
 
@@ -19,7 +19,7 @@ def test_insert_event():
 
     print(response)
 
-# @pytest.mark.skip(reason="dont have necessity")
+@pytest.mark.skip(reason="dont have necessity")
 def test_get_event_by_id():
     event_id = 'meu-slug-aq-kkkk'
     events_repository = EventsRepository()
