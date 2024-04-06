@@ -5,6 +5,10 @@ from src.models.entities.attendees import Attendees
 from src.models.entities.check_ins import CheckIns
 from src.models.entities.events import Events
 from sqlalchemy.exc import IntegrityError,NoResultFound
+from src.erros.erros_types.http_conflict import HttpConflictserror
+from src.erros.erros_types.http_not_found import HttpNotFound
+
+
 
 class AttendeesRepository:
         
@@ -23,7 +27,7 @@ class AttendeesRepository:
                 return attendee_info
             
             except IntegrityError:
-                raise Exception('Convidado já cadastrado 🙂🥱')
+                raise HttpConflictserror('Convidado já cadastrado 🙂🥱')
             
             except Exception as exception:
                 database.session.rollback()
@@ -47,7 +51,7 @@ class AttendeesRepository:
                 return attendee
             
             except NoResultFound:
-                raise Exception('Este convidado não existe em nosso banco de dados 🤨🤔')
+                raise HttpNotFound('Este convidado não existe em nosso banco de dados 🤨🤔')
             
             except Exception as exception:
                 database.session.rollback()

@@ -4,6 +4,8 @@ from src.models.settings.connection import db_connection_handler
 from src.models.entities.events import Events
 from src.models.entities.attendees import Attendees
 from sqlalchemy.exc import IntegrityError,NoResultFound
+from src.erros.erros_types.http_conflict import HttpConflictserror
+from src.erros.erros_types.http_not_found import HttpNotFound
 
 
 class EventsRepository:
@@ -23,7 +25,7 @@ class EventsRepository:
                 return eventsInfo
             
             except IntegrityError:
-                raise Exception('Evento já cadastrado 🙂🥱')
+                raise HttpConflictserror('Evento já cadastrado 🙂🥱')
             
             except Exception as exception:
                 database.session.rollback()
@@ -36,7 +38,7 @@ class EventsRepository:
                event = database.session.query(Events).filter(Events.id == event_id).one()
 
             except NoResultFound:
-                raise Exception('Este evento não existe em nosso banco de dados 🤨🤔')
+                raise HttpNotFound('Este evento não existe em nosso banco de dados 🤨🤔')
             
             except Exception as exception:
                 database.session.rollback()
