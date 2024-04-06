@@ -1,7 +1,6 @@
 # pylint: disable-all
 from src.models.settings.base import Base
-from  sqlalchemy import Column, String, Integer
-
+from sqlalchemy import Column, String, Integer
 
 class Events(Base):
     __tablename__ = "events"
